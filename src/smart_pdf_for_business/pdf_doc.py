@@ -19,7 +19,16 @@ from .utils import chunk_text_semantically, save_signatures, center_of, distance
 _shared_model = SentenceTransformer('all-MiniLM-L6-v2')
 _shared_signature_detector = SignatureDetector()
 _shared_spacy_layout = spaCyLayout(spacy.blank("en"))
-_shared_nlp = spacy.load("en_core_web_sm")
+
+
+try:
+    _shared_nlp = spacy.load("en_core_web_sm")
+except OSError:
+    from spacy.cli.download import download
+    download('en_core_web_sm')
+    _shared_nlp = spacy.load("en_core_web_sm")
+
+
 signature_whitelist = { 
     "PERSON",     # Signer name
     "ORG",        # Company/agency
