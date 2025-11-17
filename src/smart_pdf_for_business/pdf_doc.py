@@ -598,7 +598,6 @@ class PDFDoc:
             if annotate_signatures and self.signatures:
                 lines = section_text.split("\n")
                 for sig in self.signatures:
-                    print(sig)
                     kw = sig.keyword.lower() if sig.keyword else None
                     bbox = sig.bbox
                     note = f" [SIGNED: '{sig.text}' at bbox {bbox}]"
